@@ -1,0 +1,44 @@
+apiVersion: v1
+data:
+  traefik.toml: |
+    # traefik.toml
+    logLevel = "info"
+    defaultEntryPoints = ["http","https"]
+    [entryPoints]
+      [entryPoints.http]
+      address = ":80"
+      compress = true
+      [entryPoints.https]
+      address = ":443"
+      compress = true
+        [entryPoints.https.tls]
+          [[entryPoints.https.tls.certificates]]
+          CertFile = "/ssl/tls.crt"
+          KeyFile = "/ssl/tls.key"
+      [entryPoints.prometheus]
+      address = ":9100"
+    [ping]
+    entryPoint = "http"
+    [kubernetes]
+      [kubernetes.ingressEndpoint]
+      publishedService = "kube-system/traefik"
+    [traefikLog]
+      format = "json"
+    [api]
+      dashboard = true
+    [metrics]
+      [metrics.prometheus]
+        entryPoint = "prometheus"
+kind: ConfigMap
+metadata:
+  creationTimestamp: "2020-07-06T16:40:15Z"
+  labels:
+    app: traefik
+    chart: traefik-1.81.0
+    heritage: Helm
+    release: traefik
+  name: traefik
+  namespace: kube-system
+#  resourceVersion: "7495"
+  selfLink: /api/v1/namespaces/kube-system/configmaps/traefik
+#  uid: 91f80c9e-8477-44e3-a2c0-51b0d39db1c4
