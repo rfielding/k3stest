@@ -294,7 +294,7 @@ This is only PART of getting this to work, because the build script that sets it
 
 k3d delete all
 
-k3d create --port 80:80 
+k3d create --port 443:443
 sleep 30
 
 #docker stop registry
@@ -330,12 +330,12 @@ The sleeps are in there because as a distributed system, where readiness probes 
 
 - The ingress setup is
   - traefik.yaml - to just edit to get the dashboard running at http://localhost:8080
-  - ingress.yaml - to setup the web site endpoint at http://localhost:80
+  - ingress.yaml - to setup the web site endpoint at https://localhost:443
 - The KUBECONFIG file has the admin user and password, which can be used to check https://localhost:6443 to connect to Kubernetes control, like the kubectl command does.
 
 So, if you bring up your browser to these URLS, you are working:
 
-- http://localhost:80 - a trivial app that uses Redis and some static assets
+- https://localhost:443 - a trivial app that uses Redis and some static assets
 - http://localhost:8080 - a traefik dashboard, that if you modify `ingress.yaml` via: `kubectl apply -f ingress.yaml` will hot-reload to show the current state of ingress.
 
 Other commands:
