@@ -34,5 +34,5 @@ kubectl -n kube-system scale deploy traefik --replicas 0
 kubectl -n kube-system scale deploy traefik --replicas 1
 
 kubectl get all
-sleep 20
-kubectl -n kube-system port-forward deployment/traefik 8080 
+sleep 30
+kubectl -n kube-system port-forward deployment/traefik 8080 &
