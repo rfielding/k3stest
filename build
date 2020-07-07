@@ -1,5 +1,7 @@
 #!/bin/bash
 
+. ./certbuild
+
 k3d delete all
 
 k3d create --port 80:80 

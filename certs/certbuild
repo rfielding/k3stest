@@ -1,0 +1,24 @@
+#!/bin/bash
+
+#!/bin/bash
+
+cat /etc/ssl/openssl.cnf ./certs/exts > ./certs/openssl.cfg
+
+openssl genrsa -out ./certs/k3stestca_key.pem 4096 && \
+    openssl req -x509 -new -nodes -key ./certs/k3stestca_key.pem -sha256 -days 1024 \
+      -subj "/C=US/ST=Virginia/OU=Ops/O=Decipher/CN=k3stestca" -out ./certs/k3stestca_cert.pem
+
+openssl genrsa -out ./certs/k3stestserver_key.pem 2048 && \
+  openssl req -new -sha256 -key ./certs/k3stestserver_key.pem -reqexts srvx -config ./certs/openssl.cfg \
+    -subj "/C=US/ST=Virginia/OU=Servers/O=Decipher/CN=localhost" -out ./certs/k3stestserver.csr && \
+      openssl x509 -req -in ./certs/k3stestserver.csr \
+      -CA ./certs/k3stestca_cert.pem -CAkey ./certs/k3stestca_key.pem -CAcreateserial -out ./certs/k3stestserver_cert.pem -days 500 -sha256  && \
+      cat ./certs/k3stestserver_cert.pem ./certs/k3stestserver_key.pem > ./certs/k3stestserver.pem && \
+      cat ./certs/k3stestserver_cert.pem ./certs/k3stestserver_key.pem > ./certs/k3stestserver.pem
+
+openssl genrsa -out ./certs/k3stestclient_key.pem 2048 && \
+  openssl req -new -sha256 -key ./certs/k3stestclient_key.pem -reqexts clix -config ./certs/openssl.cfg \
+    -subj "/C=US/ST=Virginia/OU=Users/O=Decipher/CN=k3stestclient" -out ./certs/k3stestclient.csr && \
+      openssl x509 -req -in ./certs/k3stestclient.csr \
+      -CA ./certs/k3stestca_cert.pem -CAkey ./certs/k3stestca_key.pem -CAcreateserial -out ./certs/k3stestclient_cert.pem -days 500 -sha256  && \
+      cat ./certs/k3stestclient_cert.pem ./certs/k3stestclient_key.pem > ./certs/k3stestclient.pem

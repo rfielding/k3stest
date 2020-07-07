@@ -1,0 +1,6 @@
+[ srvx ]
+subjectAltName = DNS.1:localhost,DNS.2:k3stest,IP:127.0.0.1
+
+[ clix ]
+keyUsage = digitalSignature
+extendedKeyUsage = clientAuth
