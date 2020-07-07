@@ -1,6 +1,12 @@
 #!/bin/bash
 
-. ./certbuild
+if [ -f ./certs/k3stestserver_cert.pem ]
+then
+  echo certs were generated already
+else
+  echo certs being generated
+  ./certs/certbuild
+fi
 
 k3d delete all
 
