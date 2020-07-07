@@ -296,8 +296,18 @@ k3d delete all
 
 k3d create --port 80:80 
 sleep 30
+
+#docker stop registry
+#docker rm -f registry
+#docker run -d -p 5000:5000 --restart=always --name registry registry:2 
+
+docker build -t robfielding/k3stest-frontend .
+docker push robfielding/k3stest-frontend
+
+#docker tag k3stest-frontend localhost:5000/k3stest-frontend
+#docker push localhost:5000/k3stest-frontend
+
 export KUBECONFIG="$(k3d get-kubeconfig --name='k3s-default')"
-sleep 60
 
 kubectl apply -f redis-master-deployment.yaml	
 kubectl apply -f redis-master-service.yaml	
@@ -310,8 +320,10 @@ kubectl apply -f traefik.yaml
 sleep 10
 kubectl -n kube-system scale deploy traefik --replicas 0
 kubectl -n kube-system scale deploy traefik --replicas 1
+
+kubectl get all
 sleep 20
-kubectl -n kube-system port-forward deployment/traefik 8080 &
+kubectl -n kube-system port-forward deployment/traefik 8080 
 ``` 
 
 The sleeps are in there because as a distributed system, where readiness probes are being used, there are race conditions on getting everything up and running.  The main highlights:

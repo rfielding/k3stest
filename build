@@ -5,7 +5,13 @@ k3d delete all
 k3d create --port 80:80 
 sleep 30
 export KUBECONFIG="$(k3d get-kubeconfig --name='k3s-default')"
-sleep 60
+sleep 10
+
+if [ "x$1" == "xcode" ]
+then
+  docker build -t robfielding/k3stest-frontend .
+  docker push robfielding/k3stest-frontend
+fi
 
 kubectl apply -f redis-master-deployment.yaml	
 kubectl apply -f redis-master-service.yaml	
@@ -18,5 +24,7 @@ kubectl apply -f traefik.yaml
 sleep 10
 kubectl -n kube-system scale deploy traefik --replicas 0
 kubectl -n kube-system scale deploy traefik --replicas 1
+
+kubectl get all
 sleep 20
-kubectl -n kube-system port-forward deployment/traefik 8080 &
+kubectl -n kube-system port-forward deployment/traefik 8080 
