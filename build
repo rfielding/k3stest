@@ -1,13 +1,5 @@
 #!/bin/bash
 
-if [ -f ./certs/k3stestserver_cert.pem ]
-then
-  echo certs were generated already
-else
-  echo certs being generated
-  ./certs/certbuild
-fi
-
 k3d delete all
 
 k3d create --port 443:443
@@ -21,11 +13,11 @@ then
   docker push robfielding/k3stest-frontend
 fi
 
-kubectl apply -f redis-master.yaml	
-kubectl apply -f redis-slave.yaml	
-kubectl apply -f frontend.yaml	
-kubectl apply -f ingress.yaml
-kubectl apply -f traefik.yaml
+kubectl apply -f kube/redis-master.yaml	
+kubectl apply -f kube/redis-slave.yaml	
+kubectl apply -f kube/frontend.yaml	
+kubectl apply -f kube/ingress.yaml
+kubectl apply -f kube/traefik.yaml
 sleep 10
 kubectl -n kube-system scale deploy traefik --replicas 0
 kubectl -n kube-system scale deploy traefik --replicas 1
