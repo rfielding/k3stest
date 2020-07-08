@@ -22,8 +22,7 @@ then
 fi
 
 kubectl apply -f redis-master.yaml	
-kubectl apply -f redis-slave-deployment.yaml	
-kubectl apply -f redis-slave-service.yaml
+kubectl apply -f redis-slave.yaml	
 kubectl apply -f frontend.yaml	
 kubectl apply -f ingress.yaml
 kubectl apply -f traefik.yaml
