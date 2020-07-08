@@ -1,18 +1,11 @@
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-  name: nginx
-  annotations:
-    ingress.kubernetes.io/ssl-redirect: "false"
-#    ingress.kubernetes.io/rewrite-target: /$1
+  name: edge
 spec:
-#  tls:
-#  - hosts:
-#    - localhost
   rules:
   - http:
       paths:
-      #- path: /front
       - path: /
         backend:
           serviceName: frontend
