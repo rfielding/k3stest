@@ -1,6 +1,0 @@
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: k3st
-data:
-  myvalue: "Hell World!"

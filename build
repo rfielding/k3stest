@@ -13,9 +13,9 @@ then
   docker push robfielding/k3stest-frontend
 fi
 
-kubectl apply -f kube/redis-master.yaml	
-kubectl apply -f kube/redis-slave.yaml	
-kubectl apply -f kube/frontend.yaml	
+helm uninstall k3st
+helm install k3st ./k3st
+
 kubectl apply -f kube/ingress.yaml
 kubectl apply -f kube/traefik.yaml
 sleep 10
