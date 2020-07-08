@@ -39,6 +39,4 @@ metadata:
     release: traefik
   name: traefik
   namespace: kube-system
-#  resourceVersion: "7495"
   selfLink: /api/v1/namespaces/kube-system/configmaps/traefik
-#  uid: 91f80c9e-8477-44e3-a2c0-51b0d39db1c4
