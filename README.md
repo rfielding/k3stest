@@ -6,6 +6,13 @@ The goal is to install a trivial k3s app, along with the dashboard, so that you 
 
 - Install Docker if you have not already
 - Install k3s:  https://rancher.com/docs/k3s/latest/en/quick-start/
+
+Under Linux.  Be careful to not blindly install "k3d", which is a different program.
+
+```
+wget -q -O - https://raw.githubusercontent.com/rancher/k3d/master/install.sh | bash
+```
+
 - Install helm if you have not already
 
 > I know that this lacks detail at the moment.  I do not have a clean machine from which to document exactly what I did right now.
