@@ -16,6 +16,7 @@ fi
 helm uninstall k3st
 helm install k3st ./k3st
 
+# Generic ingress routing
 kubectl apply -f kube/ingress.yaml
 kubectl apply -f kube/traefik.yaml
 sleep 10
