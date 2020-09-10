@@ -5,7 +5,7 @@ export MYCLUSTER=gmd
 k3d cluster delete $MYCLUSTER
 k3d cluster create gmd --api-port 6999 --port 443:443@loadbalancer 
 sleep 30
-export KUBECONFIG="$(k3d get-kubeconfig --name=$MYCLUSTER)"
+export KUBECONFIG="$(k3d kubeconfig write $MYCLUSTER)"
 sleep 20
 
 if [ "x$1" == "xcode" ]
