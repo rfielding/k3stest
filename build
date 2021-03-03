@@ -17,13 +17,17 @@ fi
 helm uninstall k3st
 helm install k3st ./k3st
 
+kubectl config use-context k3d-$MYCLUSTER
+
 # Generic ingress routing
 kubectl apply -f kube/ingress.yaml
-kubectl apply -f kube/traefik.yaml
-sleep 30
-kubectl -n kube-system scale deploy traefik --replicas 0
-kubectl -n kube-system scale deploy traefik --replicas 1
+
+#kubectl apply -f kube/traefik.yaml
+#sleep 30
+#kubectl -n kube-system scale deploy traefik --replicas 0
+#kubectl -n kube-system scale deploy traefik --replicas 1
 
 kubectl get all
-sleep 30
+echo sleeping for 6 minutes....
+sleep 3600
 kubectl -n kube-system port-forward deployment/traefik 8080 &
