@@ -29,5 +29,6 @@ kubectl apply -f kube/ingress.yaml
 
 kubectl get all
 echo sleeping for 6 minutes....
-sleep 3600
+sleep 360
+echo setup a port forward
 kubectl -n kube-system port-forward deployment/traefik 8080 &
