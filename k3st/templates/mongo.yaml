@@ -21,7 +21,9 @@ spec:
           valueFrom:
             configMapKeyRef:
               name: cm
-              key: mongo_db_name 
+              key: mongo_db_name
+        - name: MONGO_TESTVAL
+          value: {{ .Values.mongo.testval }} 
 ---
 apiVersion: v1
 kind: Service

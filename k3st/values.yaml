@@ -78,3 +78,6 @@ nodeSelector: {}
 tolerations: []
 
 affinity: {}
+
+mongo:
+  testval: mongo_testval
