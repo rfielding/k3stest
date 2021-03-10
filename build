@@ -14,7 +14,10 @@ then
   docker push robfielding/k3stest-frontend
 fi
 
+#helm repo add stable https://charts.helm.sh/stable
+helm repo add bitnami https://charts.bitnami.com/bitnami
 helm uninstall k3st
+helm install data -f values.yaml bitnami/mongodb
 helm install k3st ./k3st
 
 kubectl config use-context k3d-$MYCLUSTER
