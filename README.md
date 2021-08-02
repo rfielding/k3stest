@@ -358,3 +358,8 @@ Other commands:
 kubectl -n kube-system get all
 ```
 
+## Mongodb
+
+Even though this is a bitnami repo, I found better docs on parameters at IBM:
+
+https://cloud.ibm.com/catalog/content/mongodb-Qml0bmFtaS1tb25nb2Ri-global

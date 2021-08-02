@@ -1,4 +1,10 @@
 architecture: replicaset
-replicaCount: 4
+replicaCount: 3
 persistence:
   enabled: true
+auth:
+  enabled: true
+  database: gmdata
+  username: gmdata
+  password: g1bb3r1sh
+
